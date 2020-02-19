@@ -7,6 +7,7 @@ describe("HelloWorld.vue", () => {
     const wrapper = shallowMount(HelloWorld, {
       propsData: { msg }
     });
+
     expect(wrapper.text()).toMatch(msg);
   });
 
@@ -16,15 +17,26 @@ describe("HelloWorld.vue", () => {
         msg: "g"
       }
     });
+
     expect(wrapper.props("msg")).toBe("g");
   });
 
-  it("expect propsData is containing a msg property key", () => {
+  it("expect prop is containing a msg property with undefined as value", () => {
     const wrapper = mount(HelloWorld, {
       propsData: {
         msg: ""
       }
     });
-    expect(wrapper.vm.$options.propsData).toHaveProperty("msg");
+    expect(wrapper.props().msg).toBe("");
+  });
+
+  it("expect .awesome-vue class is existed in this component", () => {
+    const wrapper = mount(HelloWorld);
+    expect(wrapper.find(".awesome-vue").exists()).toBe(true);
+  });
+
+  it("expect .awesome-vue class text is awesome-vue", () => {
+    const wrapper = mount(HelloWorld);
+    expect(wrapper.find(".awesome-vue").text()).toBe("awesome-vue");
   });
 });

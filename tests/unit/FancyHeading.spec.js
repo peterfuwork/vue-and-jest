@@ -11,23 +11,17 @@ function mountComponentWithProps(Component, propsData) {
 }
 
 describe("FancyHeading.vue", () => {
+  const headingData = mountComponentWithProps(FancyHeading, {
+    color: "blue",
+    title: "Hello, Vue!"
+  });
   it("should be the correct color", () => {
-    const headingData = mountComponentWithProps(FancyHeading, {
-      color: "blue"
-    });
     const styleData = headingData.style.getPropertyValue("color");
-
-    console.log(styleData);
-
     expect(styleData).toEqual("blue");
   });
 
   it("should have the correct title", () => {
-    const headingData = mountComponentWithProps(FancyHeading, {
-      title: "Hello, Vue!"
-    });
     const titleData = headingData.textContent;
-
     expect(titleData).toEqual("Hello, Vue!");
   });
 });
